@@ -6,3 +6,5 @@ order2 = PizzaOrder.new({first_name: "Stephen", last_name: "Beattie", topping: "
 
 order1.save
 order2.save
+order2.first_name = "Stevie"
+order2.update

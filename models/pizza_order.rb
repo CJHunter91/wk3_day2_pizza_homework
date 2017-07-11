@@ -5,6 +5,7 @@ require('pg')
 
 class PizzaOrder
 
+  attr_accessor :first_name, :last_name, :topping, :quantity
 
   def initialize(options)
     @id = options[:id].to_i if options[:id]
@@ -19,12 +20,16 @@ class PizzaOrder
     db = PG.connect(dbname: 'pizza_orders', host: 'localhost')
 
     sql = "INSERT INTO pizza_orders (first_name, last_name, topping, quantity) VALUES ('#{@first_name}', '#{@last_name}', '#{@topping}', #{@quantity}) RETURNING id;"
-    @id = db.exec_params(sql)[0]['id']
+    @id = db.exec(sql)[0]['id']
     db.close
   end
 
   def update
-
+    db = PG.connect({dbname: 'pizza_orders', host: 'localhost'})
+    sql = "UPDATE pizza_orders SET (first_name, last_name, topping, quantity) = ('#{@first_name}', '#{@last_name}', '#{@topping}', '#{@quantity}') WHERE id = '#{@id}'"
+    p sql
+    db.exec(sql)
+    db.close
   end
 
   def delete
