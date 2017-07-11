@@ -27,20 +27,26 @@ class PizzaOrder
   def update
     db = PG.connect({dbname: 'pizza_orders', host: 'localhost'})
     sql = "UPDATE pizza_orders SET (first_name, last_name, topping, quantity) = ('#{@first_name}', '#{@last_name}', '#{@topping}', '#{@quantity}') WHERE id = '#{@id}'"
-    p sql
     db.exec(sql)
     db.close
   end
 
   def delete
-
+    db = PG.connect(dbname: 'pizza_orders', host: 'localhost')
+    sql = "DELETE FROM pizza_orders WHERE id = '#{@id}'"
+    db.exec(sql)
+    p "Object deleted from DB"
+    db.close
   end
 
-  def delete_all
-
+  def self.delete_all
+    db = PG.connect(dbname: 'pizza_orders', host: 'localhost')
+    sql = "DELETE FROM pizza_orders"
+    db.exec(sql)
+    db.close
   end
 
-  def all
+  def self.all
 
   end
 
