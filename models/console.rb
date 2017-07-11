@@ -8,5 +8,3 @@ order1.save
 order2.save
 order2.first_name = "Stevie"
 order2.update
-order1.delete
-PizzaOrder.delete_all

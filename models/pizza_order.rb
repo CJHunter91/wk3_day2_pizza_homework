@@ -47,6 +47,12 @@ class PizzaOrder
   end
 
   def self.all
+    db = PG.connect(dbname: 'pizza_orders', host: 'localhost')
+    sql = "SELECT * FROM pizza_orders"
+    orders = db.exec(sql)
+    #visual to see each order
+    orders.each{|order| p order if PizzaOrder.new(order)}
+    db.close
 
   end
 
